@@ -11,7 +11,6 @@ import { Doc, Id } from "@/_generated/dataModel";
 
 import { Item } from "./item";
 
-
 interface DocumentListProps {
   parentDocumentId?: Id<"documents">;
   level?: number;
@@ -64,9 +63,7 @@ export const DocumentList = ({
           expanded && "last:block",
           level === 0 && "hidden",
         )}
-      >
-        No pages inside
-      </p>
+      ></p>
       {documents.map((document) => (
         <div key={document._id}>
           <Item

@@ -1,9 +1,12 @@
-import { Toaster } from "sonner";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/providers/theme-provider";
+
+import { Toaster } from "sonner";
 import { Metadata } from "next/types";
+import { Inter } from "next/font/google";
+
+import { ThemeProvider } from "@/providers/theme-provider";
 import { ConvexClientProvider } from "@/providers/convex-provider";
+import { ModalProvider } from "@/providers/modal-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,6 +46,7 @@ export default function RootLayout({
             storageKey="coflowy-theme"
           >
             <Toaster position="bottom-center" />
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </ConvexClientProvider>

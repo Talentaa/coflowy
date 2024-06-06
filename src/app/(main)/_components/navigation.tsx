@@ -22,15 +22,17 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { useSearch } from "@/hooks/use-search";
+import { useSettings } from "@/hooks/use-settings";
 
 import { DocumentList } from "./document-list";
 import { Item } from "./item";
 import { TrashBox } from "./trash-box";
 import { UserItem } from "./user-item";
-import { useSearch } from "@/hooks/use-search";
 
 export const Navigation = () => {
-  const { onOpen } = useSearch();
+  const { onOpen: searchOpen } = useSearch();
+  const { onOpen: settingsOpen } = useSettings();
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -147,8 +149,8 @@ export const Navigation = () => {
         </div>
         <div>
           <UserItem />
-          <Item label="Search" icon={Search} isSearch onClick={onOpen} />
-          <Item label="Settings" icon={Settings} onClick={() => {}} />
+          <Item label="Search" icon={Search} isSearch onClick={searchOpen} />
+          <Item label="Settings" icon={Settings} onClick={settingsOpen} />
           <Item onClick={handleCreate} label="New Page" icon={PlusCircle} />
         </div>
         <div className="mt-4">

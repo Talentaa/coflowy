@@ -8,9 +8,10 @@ import { useParams } from "next/navigation";
 import { api } from "@/_generated/api";
 import { Id } from "@/_generated/dataModel";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useCoverImage } from "@/hooks/use-cover-image";
-import { cn } from "@/lib/utils";
 import { useEdgeStore } from "@/lib/edgestore";
+import { cn } from "@/lib/utils";
 
 interface CoverProps {
   url?: string;
@@ -68,4 +69,8 @@ export const Cover = ({ url, preview }: CoverProps) => {
       )}
     </div>
   );
+};
+
+Cover.Skeleton = function CoverSkeleton() {
+  return <Skeleton className="w-full h-[12vh]" />;
 };

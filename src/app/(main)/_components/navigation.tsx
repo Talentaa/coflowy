@@ -10,7 +10,7 @@ import {
   Settings,
   Trash,
 } from "lucide-react";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import React, { ElementRef, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
@@ -21,21 +21,22 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
 import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-settings";
+import { cn } from "@/lib/utils";
 
 import { DocumentList } from "./document-list";
 import { Item } from "./item";
+import { Navbar } from "./navbar";
 import { TrashBox } from "./trash-box";
 import { UserItem } from "./user-item";
-import { Navbar } from "./navbar";
 
 export const Navigation = () => {
   const { onOpen: searchOpen } = useSearch();
   const { onOpen: settingsOpen } = useSettings();
   const pathname = usePathname();
   const params = useParams();
+  const router = useRouter();
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const create = useMutation(api.documents.create);
@@ -120,7 +121,9 @@ export const Navigation = () => {
   };
 
   const handleCreate = () => {
-    const promise = create({ title: "Untitled" });
+    const promise = create({ title: "Untitled" }).then((documentId) =>
+      router.push(`/documents/${documentId}`),
+    );
 
     toast.promise(promise, {
       loading: "Creating a new note...",

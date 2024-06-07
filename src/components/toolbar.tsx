@@ -1,13 +1,14 @@
 "use client";
 
+import { useMutation } from "convex/react";
 import { ImageIcon, Smile, X } from "lucide-react";
 import React, { ElementRef, useRef, useState } from "react";
-import { useMutation } from "convex/react";
 import TextAreaAutoSize from "react-textarea-autosize";
 
 import { api } from "@/_generated/api";
 import { Doc } from "@/_generated/dataModel";
 import { Button } from "@/components/ui/button";
+import { useCoverImage } from "@/hooks/use-cover-image";
 
 import { IconPicker } from "./icon-picker";
 
@@ -23,6 +24,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
 
   const update = useMutation(api.documents.update);
   const removeIcon = useMutation(api.documents.removeIcon);
+
+  const coverImage = useCoverImage();
 
   const enableInput = () => {
     if (preview) return;
@@ -102,7 +105,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         {!initialData.coverImage && !preview && (
           <Button
             className="text-muted-foreground text-xs"
-            onClick={() => {}}
+            onClick={coverImage.onOpen}
             variant="outline"
             size="sm"
           >

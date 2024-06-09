@@ -3,7 +3,7 @@ interface PublicLayoutProps {
 }
 
 const PublicLayout = ({ children }: PublicLayoutProps) => {
-  return <div className="h-full dark:bg-[#1f1f1f]">{children}</div>;
+  return <div className="dark:bg-[#1f1f1f]">{children}</div>;
 };
 interface PublicLayoutProps {}
 
